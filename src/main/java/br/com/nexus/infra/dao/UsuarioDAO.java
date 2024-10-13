@@ -15,19 +15,18 @@ public class UsuarioDAO {
 
     public void persistirUsuario(Usuario usuario) {
         String sqlInsert = """
-                INSERT INTO TB_USUARIO (id_usuario, nome_usuario, email_usuario, senha_usuario, genero_usuario, telefone_usuario, cpf_usuario)
-                VALUES (?, ?, ?, ?, ?, ?, ?)
+                INSERT INTO TB_USUARIO (nome_usuario, email_usuario, senha_usuario, genero_usuario, telefone_usuario, cpf_usuario)
+                VALUES (?, ?, ?, ?, ?, ?)
                 """;
 
         try {
             PreparedStatement ps = conexao.prepareStatement(sqlInsert);
-            ps.setLong(1, 1);
-            ps.setString(2, usuario.getNome());
-            ps.setString(3, usuario.getEmail());
-            ps.setString(4, usuario.getSenha());
-            ps.setString(5, usuario.getGenero());
-            ps.setString(6, usuario.getTelefone());
-            ps.setString(7, usuario.getCpf());
+            ps.setString(1, usuario.getNome());
+            ps.setString(2, usuario.getEmail());
+            ps.setString(3, usuario.getSenha());
+            ps.setString(4, usuario.getGenero());
+            ps.setString(5, usuario.getTelefone());
+            ps.setString(6, usuario.getCpf());
             ps.execute();
             ps.close();
         } catch (SQLException e) {
