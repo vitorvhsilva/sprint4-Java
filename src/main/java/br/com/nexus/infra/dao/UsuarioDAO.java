@@ -1,6 +1,6 @@
 package br.com.nexus.infra.dao;
 
-import br.com.nexus.model.Repositorio;
+import br.com.nexus.model.RepositorioUsuario;
 import br.com.nexus.model.Usuario;
 
 import java.sql.Connection;
@@ -8,7 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class UsuarioDAO implements Repositorio {
+public class UsuarioDAO implements RepositorioUsuario {
     private Connection conexao;
 
     public UsuarioDAO() {
@@ -52,6 +52,92 @@ public class UsuarioDAO implements Repositorio {
         }catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public boolean usuarioExistePorCpf(String cpf) {
+
+        String sqlSelect = "SELECT * FROM TB_USUARIO WHERE cpf_usuario = ?";
+        boolean existe;
+
+        try {
+            PreparedStatement statement = conexao.prepareStatement(sqlSelect);
+            statement.setString(1, cpf);
+            ResultSet rs = statement.executeQuery();
+            existe = rs.next();
+        } catch (SQLException e) {
+            return false;
+        }
+
+        return existe;
+    }
+
+    public boolean usuarioExistePorEmail(String email) {
+
+        String sqlSelect = "SELECT * FROM TB_USUARIO WHERE email_usuario = ?";
+        boolean existe;
+
+        try {
+            PreparedStatement statement = conexao.prepareStatement(sqlSelect);
+            statement.setString(1, email);
+            ResultSet rs = statement.executeQuery();
+            existe = rs.next();
+        } catch (SQLException e) {
+            return false;
+        }
+
+        return existe;
+    }
+
+    public Long retornarIdPorCpf(String cpf) {
+
+        String sqlSelect = "SELECT * FROM TB_USUARIO WHERE cpf_usuario = ?";
+        Long id = null;
+        try {
+            PreparedStatement statement = conexao.prepareStatement(sqlSelect);
+            statement.setString(1, cpf);
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()) {
+                id = rs.getLong("id_usuario");
+            }
+
+            statement.close();
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return id;
+    }
+
+    public Usuario retornarUsuarioPorLogin(String email, String senha) {
+
+        String sqlSelect = "SELECT * FROM TB_USUARIO WHERE email_usuario = ? AND senha_usuario = ?";
+        Usuario usuario = new Usuario();
+        try {
+            PreparedStatement statement = conexao.prepareStatement(sqlSelect);
+            statement.setString(1, email);
+            statement.setString(2, senha);
+            ResultSet rs = statement.executeQuery();
+
+            if (!rs.next()) {
+                System.out.println("Login não encontrado!");
+                return null;
+            }
+
+            usuario.setNome(rs.getString("nome_usuario"));
+            usuario.setEmail(rs.getString("email_usuario"));
+            usuario.setSenha(rs.getString("senha_usuario"));
+            usuario.setGenero(rs.getString("genero_usuario"));
+            usuario.setTelefone(rs.getString("telefone_usuario"));
+            usuario.setCpf(rs.getString("cpf_usuario"));
+
+            statement.close();
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return usuario;
     }
 
     @Override
