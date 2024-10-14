@@ -12,6 +12,6 @@ public class UsuarioService {
     }
 
     public void persistirUsuario(Usuario usuario) {
-        usuarioDAO.persistirUsuario(usuario);
+        usuarioDAO.persistirDado(usuario);
     }
 }
