@@ -1,4 +1,4 @@
-package br.com.nexus.model;
+package br.com.nexus.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

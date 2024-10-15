@@ -1,4 +1,6 @@
-package br.com.nexus.model;
+package br.com.nexus.domain.repository;
+
+import br.com.nexus.domain.model.Usuario;
 
 public interface RepositorioUsuario extends Repositorio{
     boolean usuarioExistePorCpf(String cpf);

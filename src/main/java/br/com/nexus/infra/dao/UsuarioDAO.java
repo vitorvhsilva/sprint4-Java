@@ -1,7 +1,7 @@
 package br.com.nexus.infra.dao;
 
-import br.com.nexus.model.RepositorioUsuario;
-import br.com.nexus.model.Usuario;
+import br.com.nexus.domain.repository.RepositorioUsuario;
+import br.com.nexus.domain.model.Usuario;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

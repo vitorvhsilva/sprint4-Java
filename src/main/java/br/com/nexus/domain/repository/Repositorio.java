@@ -1,4 +1,4 @@
-package br.com.nexus.model;
+package br.com.nexus.domain.repository;
 
 public interface Repositorio {
     Long obterProximoId();

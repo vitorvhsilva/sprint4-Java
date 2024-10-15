@@ -2,7 +2,7 @@ package br.com.nexus.controller;
 
 import br.com.nexus.dto.UsuarioLoginDTO;
 import br.com.nexus.infra.dao.UsuarioDAO;
-import br.com.nexus.model.Usuario;
+import br.com.nexus.domain.model.Usuario;
 import br.com.nexus.service.UsuarioService;
 
 import javax.ws.rs.POST;
@@ -23,8 +23,16 @@ public class UsuarioController {
     @Path("/cadastro")
     @Produces(MediaType.APPLICATION_JSON)
     public Response persistirUsuario(Usuario usuario) {
-        usuarioService.persistirUsuario(usuario);
-        return Response.status(Response.Status.CREATED).build();
+        try {
+            usuarioService.persistirUsuario(usuario);
+            return Response.status(Response.Status.CREATED).build();
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+            return Response
+                    .status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity(e.getMessage()).build();
+        }
 
     }
 
