@@ -4,7 +4,7 @@ import br.com.nexus.domain.model.Usuario;
 
 import java.util.List;
 
-public interface RepositorioUsuario extends Repositorio{
+public interface RepositorioUsuarios extends Repositorio{
     boolean usuarioExistePorCpf(String cpf);
     boolean usuarioExistePorEmail(String email);
     Long retornarIdPorCpf(String cpf);

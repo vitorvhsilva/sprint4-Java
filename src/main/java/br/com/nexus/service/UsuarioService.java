@@ -1,7 +1,7 @@
 package br.com.nexus.service;
 
 import br.com.nexus.dto.UsuarioLoginDTO;
-import br.com.nexus.domain.repository.RepositorioUsuario;
+import br.com.nexus.domain.repository.RepositorioUsuarios;
 import br.com.nexus.domain.model.Usuario;
 
 import java.util.List;
@@ -10,9 +10,9 @@ import java.util.regex.Pattern;
 
 public class UsuarioService {
 
-    private RepositorioUsuario usuarioDAO;
+    private RepositorioUsuarios usuarioDAO;
 
-    public UsuarioService(RepositorioUsuario usuarioDAO) {
+    public UsuarioService(RepositorioUsuarios usuarioDAO) {
         this.usuarioDAO = usuarioDAO;
     }
 
@@ -23,7 +23,7 @@ public class UsuarioService {
         usuarioDAO.fecharConexao();
     }
 
-    public boolean validarEmail(String email) {
+    private boolean validarEmail(String email) {
         String emailPattern = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
         Pattern pattern = Pattern.compile(emailPattern);
         Matcher matcher = pattern.matcher(email);

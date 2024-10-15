@@ -1,6 +1,6 @@
 package br.com.nexus.infra.dao;
 
-import br.com.nexus.domain.repository.RepositorioUsuario;
+import br.com.nexus.domain.repository.RepositorioUsuarios;
 import br.com.nexus.domain.model.Usuario;
 
 import java.sql.Connection;
@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UsuarioDAO implements RepositorioUsuario {
+public class UsuarioDAO implements RepositorioUsuarios {
     private Connection conexao;
 
     public UsuarioDAO() {

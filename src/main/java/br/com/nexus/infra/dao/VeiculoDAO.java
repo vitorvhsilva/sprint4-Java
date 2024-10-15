@@ -2,6 +2,7 @@ package br.com.nexus.infra.dao;
 
 import br.com.nexus.domain.model.Veiculo;
 import br.com.nexus.domain.repository.Repositorio;
+import br.com.nexus.domain.repository.RepositorioVeiculos;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,7 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VeiculoDAO implements Repositorio {
+public class VeiculoDAO implements RepositorioVeiculos {
     private Connection conexao;
 
     public VeiculoDAO() {
