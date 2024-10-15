@@ -8,6 +8,9 @@ public class UsuarioLoginDTO {
     @JsonProperty
     private String senha;
 
+    public UsuarioLoginDTO() {
+    }
+
     public UsuarioLoginDTO(String email, String senha) {
         this.email = email;
         this.senha = senha;

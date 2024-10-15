@@ -1,5 +1,6 @@
 package br.com.nexus.service;
 
+import br.com.nexus.dto.UsuarioLoginDTO;
 import br.com.nexus.model.RepositorioUsuario;
 import br.com.nexus.model.Usuario;
 
@@ -12,19 +13,13 @@ public class UsuarioService {
     }
 
     public void persistirUsuario(Usuario usuario) {
-
-        if (usuarioDAO.usuarioExistePorEmail(usuario.getEmail())) {
-            throw new RuntimeException("Usuário já existe pelo Email!");
-        }
-
-        if (usuarioDAO.usuarioExistePorCpf(usuario.getCpf())) {
-            throw new RuntimeException("Usuário já existe pelo CPF!");
-        }
-
         usuarioDAO.persistirDado(usuario);
+        usuarioDAO.fecharConexao();
     }
 
-    public Usuario fazerLogin(String email, String senha) {
-        return usuarioDAO.retornarUsuarioPorLogin(email, senha);
+    public Usuario fazerLogin(UsuarioLoginDTO dto) {
+        Usuario usuario = usuarioDAO.retornarUsuarioPorLogin(dto.getEmail(), dto.getSenha());
+        usuarioDAO.fecharConexao();
+        return usuario;
     }
 }
