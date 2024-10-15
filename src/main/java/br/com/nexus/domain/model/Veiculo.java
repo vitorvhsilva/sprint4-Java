@@ -4,72 +4,72 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Veiculo {
     @JsonProperty
-    private String placaVeiculo;
+    private String placa;
     @JsonProperty
-    private String marcaVeiculo;
+    private String marca;
     @JsonProperty
-    private String modeloVeiculo;
+    private String modelo;
     @JsonProperty
-    private String tipoVeiculo;
+    private String tipo;
     @JsonProperty
-    private Integer anoVeiculo;
+    private Integer ano;
     @JsonProperty
     private Long idUsuario;
 
     public Veiculo() {
     }
 
-    public Veiculo(String placaVeiculo, String marcaVeiculo, String modeloVeiculo, String tipoVeiculo, Integer anoVeiculo, Long idUsuario) {
-        this.placaVeiculo = placaVeiculo;
-        this.marcaVeiculo = marcaVeiculo;
-        this.modeloVeiculo = modeloVeiculo;
-        this.tipoVeiculo = tipoVeiculo;
-        this.anoVeiculo = anoVeiculo;
+    public Veiculo(String placa, String marca, String modelo, String tipo, Integer ano, Long idUsuario) {
+        this.placa = placa;
+        this.marca = marca;
+        this.modelo = modelo;
+        this.tipo = tipo;
+        this.ano = ano;
         this.idUsuario = idUsuario;
     }
 
-    public String getPlacaVeiculo() {
-        return placaVeiculo;
+    public String getPlaca() {
+        return placa;
     }
 
-    public String getMarcaVeiculo() {
-        return marcaVeiculo;
+    public void setPlaca(String placa) {
+        this.placa = placa;
     }
 
-    public String getModeloVeiculo() {
-        return modeloVeiculo;
+    public String getMarca() {
+        return marca;
     }
 
-    public String getTipoVeiculo() {
-        return tipoVeiculo;
+    public void setMarca(String marca) {
+        this.marca = marca;
     }
 
-    public Integer getAnoVeiculo() {
-        return anoVeiculo;
+    public String getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public Integer getAno() {
+        return ano;
+    }
+
+    public void setAno(Integer ano) {
+        this.ano = ano;
     }
 
     public Long getIdUsuario() {
         return idUsuario;
-    }
-
-    public void setPlacaVeiculo(String placaVeiculo) {
-        this.placaVeiculo = placaVeiculo;
-    }
-
-    public void setMarcaVeiculo(String marcaVeiculo) {
-        this.marcaVeiculo = marcaVeiculo;
-    }
-
-    public void setModeloVeiculo(String modeloVeiculo) {
-        this.modeloVeiculo = modeloVeiculo;
-    }
-
-    public void setTipoVeiculo(String tipoVeiculo) {
-        this.tipoVeiculo = tipoVeiculo;
-    }
-
-    public void setAnoVeiculo(Integer anoVeiculo) {
-        this.anoVeiculo = anoVeiculo;
     }
 
     public void setIdUsuario(Long idUsuario) {

@@ -4,6 +4,7 @@ import br.com.nexus.dto.UsuarioLoginDTO;
 import br.com.nexus.domain.repository.RepositorioUsuario;
 import br.com.nexus.domain.model.Usuario;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -68,5 +69,9 @@ public class UsuarioService {
         Usuario usuario = usuarioDAO.retornarUsuarioPorLogin(dto.getEmail(), dto.getSenha());
         usuarioDAO.fecharConexao();
         return usuario;
+    }
+
+    public List<Usuario> pegarUsuarios() {
+        return usuarioDAO.retornarUsuarios();
     }
 }

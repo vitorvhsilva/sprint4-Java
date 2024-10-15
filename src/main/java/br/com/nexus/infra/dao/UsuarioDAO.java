@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UsuarioDAO implements RepositorioUsuario {
     private Connection conexao;
@@ -138,6 +140,35 @@ public class UsuarioDAO implements RepositorioUsuario {
         }
 
         return usuario;
+    }
+
+    @Override
+    public List<Usuario> retornarUsuarios() {
+        String sqlSelect = "SELECT * FROM TB_USUARIO";
+        List<Usuario> usuarios = new ArrayList<>();
+        try {
+            PreparedStatement statement = conexao.prepareStatement(sqlSelect);
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()) {
+                Usuario usuario = new Usuario();
+                usuario.setNome(rs.getString("nome_usuario"));
+                usuario.setEmail(rs.getString("email_usuario"));
+                usuario.setSenha(rs.getString("senha_usuario"));
+                usuario.setGenero(rs.getString("genero_usuario"));
+                usuario.setTelefone(rs.getString("telefone_usuario"));
+                usuario.setCpf(rs.getString("cpf_usuario"));
+                usuarios.add(usuario);
+            }
+
+
+            statement.close();
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return usuarios;
     }
 
     @Override
