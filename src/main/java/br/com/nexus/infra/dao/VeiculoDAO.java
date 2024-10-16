@@ -3,6 +3,7 @@ package br.com.nexus.infra.dao;
 import br.com.nexus.domain.model.Veiculo;
 import br.com.nexus.domain.repository.Repositorio;
 import br.com.nexus.domain.repository.RepositorioVeiculos;
+import br.com.nexus.dto.UsuarioeVeiculoOutputDTO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -100,6 +101,25 @@ public class VeiculoDAO implements RepositorioVeiculos {
             throw new RuntimeException(e);
         }
         return idVeiculo;
+    }
+
+    public UsuarioeVeiculoOutputDTO pegarUsuarioEVeiculoPelaPlaca(String placa) {
+        String sqlSelect = "SELECT * FROM TB_VEICULO WHERE placa_veiculo = ?";
+        UsuarioeVeiculoOutputDTO dto = new UsuarioeVeiculoOutputDTO();
+        try {
+            PreparedStatement statement = conexao.prepareStatement(sqlSelect);
+            statement.setString(1, placa);
+            ResultSet rs = statement.executeQuery();
+            while(rs.next()) {
+                dto.setIdVeiculo(rs.getLong("id_veiculo"));
+                dto.setIdUsuario(rs.getLong("id_usuario"));
+            }
+            statement.close();
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return dto;
     }
 
     public void fecharConexao() {

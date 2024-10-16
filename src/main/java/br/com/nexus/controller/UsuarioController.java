@@ -5,10 +5,7 @@ import br.com.nexus.infra.dao.UsuarioDAO;
 import br.com.nexus.domain.model.Usuario;
 import br.com.nexus.service.UsuarioService;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
@@ -23,7 +20,6 @@ public class UsuarioController {
 
     @POST
     @Path("/cadastro")
-    @Produces(MediaType.APPLICATION_JSON)
     public Response persistirUsuario(Usuario usuario) {
         try {
             usuarioService.persistirUsuario(usuario);
@@ -35,7 +31,6 @@ public class UsuarioController {
                     .status(Response.Status.INTERNAL_SERVER_ERROR)
                     .entity(e.getMessage()).build();
         }
-
     }
 
     @POST
