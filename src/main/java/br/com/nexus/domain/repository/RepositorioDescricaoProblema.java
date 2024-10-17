@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface RepositorioDescricaoProblema extends Repositorio{
     List<DescricaoProblema> pegarDescricoes(Long idVeiculo);
+    Long buscarIdPorVeiculoEDescricao(DescricaoProblema dp);
 }

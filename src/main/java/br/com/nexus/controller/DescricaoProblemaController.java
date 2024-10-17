@@ -1,6 +1,7 @@
 package br.com.nexus.controller;
 
 import br.com.nexus.domain.model.DescricaoProblema;
+import br.com.nexus.domain.model.Diagnostico;
 import br.com.nexus.dto.DescricaoProblemaInputDTO;
 import br.com.nexus.infra.dao.DescricaoProblemaDAO;
 import br.com.nexus.infra.dao.VeiculoDAO;
@@ -36,10 +37,11 @@ public class DescricaoProblemaController {
     }
 
     @POST
+    @Produces(MediaType.APPLICATION_JSON)
     public Response persistirDescricao(DescricaoProblemaInputDTO dto){
         try {
-            descricaoProblemaService.persistirDescricao(dto);
-            return Response.status(Response.Status.CREATED).build();
+            Diagnostico diagnostico = descricaoProblemaService.persistirDescricao(dto);
+            return Response.status(Response.Status.CREATED).entity(diagnostico).build();
         } catch (RuntimeException e) {
             System.out.println(e.getMessage());
             e.printStackTrace();

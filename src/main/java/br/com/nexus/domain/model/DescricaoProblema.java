@@ -55,4 +55,14 @@ public class DescricaoProblema {
     public void setIdVeiculo(Long idVeiculo) {
         this.idVeiculo = idVeiculo;
     }
+
+    @Override
+    public String toString() {
+        return "DescricaoProblema{" +
+                "descricaoProblema='" + descricaoProblema + '\'' +
+                ", dataProblema=" + dataProblema +
+                ", idUsuario=" + idUsuario +
+                ", idVeiculo=" + idVeiculo +
+                '}';
+    }
 }
