@@ -35,8 +35,8 @@ public class AgendamentoDAO implements RepositorioAgendamentos {
     public <T> void persistirDado(T t){
         Agendamento agendamento = (Agendamento) t;
         String sqlInsert = """
-                INSERT INTO TB_AGENDAMENTO (id_agendamento, id_veiculo, id_mecanica, id_orcamento, dia_data_agendamento)
-                VALUES (?, ?, ?, ?, ?);
+                INSERT INTO TB_AGENDAMENTO (id_agendamento, id_veiculo, id_mecanica, id_orcamento, id_horario_mecanica, dia_data_agendamento)
+                VALUES (?, ?, ?, ?, ?, ?)
                 """;
 
         try {
@@ -45,7 +45,8 @@ public class AgendamentoDAO implements RepositorioAgendamentos {
             insercaoAgendamento.setLong(2, agendamento.getIdVeiculo());
             insercaoAgendamento.setLong(3, agendamento.getIdMecanica());
             insercaoAgendamento.setLong(4, agendamento.getIdOrcamento());
-            insercaoAgendamento.setTimestamp(5, Timestamp.valueOf(agendamento.getDiaDataAgendamento()));
+            insercaoAgendamento.setLong(5, agendamento.getIdOrcamento());
+            insercaoAgendamento.setTimestamp(6, Timestamp.valueOf(agendamento.getDiaDataAgendamento()));
 
             insercaoAgendamento.execute();
             insercaoAgendamento.close();
@@ -66,6 +67,7 @@ public class AgendamentoDAO implements RepositorioAgendamentos {
                 agendamento.setIdVeiculo(rs.getLong("id_veiculo"));
                 agendamento.setIdMecanica(rs.getLong("id_mecanica"));
                 agendamento.setIdOrcamento(rs.getLong("id_orcamento"));
+                agendamento.setIdHorarioMecanica(rs.getLong("id_horario_mecanica"));
                 agendamento.setDiaDataAgendamento(rs.getTimestamp("dia_data_agendamento").toLocalDateTime());
                 agendamentos.add(agendamento);
             }
@@ -90,6 +92,7 @@ public class AgendamentoDAO implements RepositorioAgendamentos {
                 agendamento.setIdVeiculo(rs.getLong("id_veiculo"));
                 agendamento.setIdMecanica(rs.getLong("id_mecanica"));
                 agendamento.setIdOrcamento(rs.getLong("id_orcamento"));
+                agendamento.setIdHorarioMecanica(rs.getLong("id_horario_mecanica"));
                 agendamento.setDiaDataAgendamento(rs.getTimestamp("dia_data_agendamento").toLocalDateTime());
                 agendamentos.add(agendamento);
             }

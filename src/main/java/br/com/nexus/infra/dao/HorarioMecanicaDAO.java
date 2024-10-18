@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +45,7 @@ public class HorarioMecanicaDAO implements RepositorioHorarioMecanicas {
     public List<HorarioMecanica> pegarHorarioPorMecanica(Long idMecanica){
         String sqlSelect = """
             SELECT *
-            FROM TB_HORARIO_MECANICA 
+            FROM TB_HORARIO_MECANICA
             WHERE id_mecanica = ?
             """;
         List<HorarioMecanica> horarioMecanicas = new ArrayList<>();
@@ -65,6 +66,32 @@ public class HorarioMecanicaDAO implements RepositorioHorarioMecanicas {
             throw new RuntimeException(e);
         }
         return horarioMecanicas;
+    }
+
+    public LocalDateTime pegarHorarioPorId(Long idHorarioMecanica){
+        String sqlSelect = """
+            SELECT *
+            FROM TB_HORARIO_MECANICA
+            WHERE id_horario_mecanica = ?
+            """;
+        List<HorarioMecanica> horarioMecanicas = new ArrayList<>();
+
+        try {
+            PreparedStatement statement = conexao.prepareStatement(sqlSelect);
+            statement.setLong(1, idHorarioMecanica);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()){
+                HorarioMecanica horarioMecanica = new HorarioMecanica();
+                horarioMecanica.setHorarioDisponivel(rs.getTimestamp("horario_disponivel").toLocalDateTime());
+                horarioMecanica.setIdMecanica(rs.getLong("id_mecanica"));
+                horarioMecanicas.add(horarioMecanica);
+            }
+            rs.close();
+            statement.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return horarioMecanicas.get(0).getHorarioDisponivel();
     }
 
     public void fecharConexao(){

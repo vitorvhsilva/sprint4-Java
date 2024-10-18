@@ -1,10 +1,10 @@
-package br.com.nexus.domain.model;
+package br.com.nexus.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.LocalDateTime;
 
-public class Agendamento {
+public class AgendamentoInputDTO {
     @JsonProperty
     private Long idVeiculo;
     @JsonProperty
@@ -13,18 +13,15 @@ public class Agendamento {
     private Long idOrcamento;
     @JsonProperty
     private Long idHorarioMecanica;
-    @JsonProperty
-    private LocalDateTime diaDataAgendamento;
 
-    public Agendamento() {
+    public AgendamentoInputDTO() {
     }
 
-    public Agendamento(Long idVeiculo, Long idMecanica, Long idOrcamento, Long idHorarioMecanica, LocalDateTime diaDataAgendamento) {
+    public AgendamentoInputDTO(Long idVeiculo, Long idMecanica, Long idOrcamento, Long idHorarioMecanica) {
         this.idVeiculo = idVeiculo;
         this.idMecanica = idMecanica;
         this.idOrcamento = idOrcamento;
         this.idHorarioMecanica = idHorarioMecanica;
-        this.diaDataAgendamento = diaDataAgendamento;
     }
 
     public Long getIdVeiculo() {
@@ -57,13 +54,5 @@ public class Agendamento {
 
     public void setIdHorarioMecanica(Long idHorarioMecanica) {
         this.idHorarioMecanica = idHorarioMecanica;
-    }
-
-    public LocalDateTime getDiaDataAgendamento() {
-        return diaDataAgendamento;
-    }
-
-    public void setDiaDataAgendamento(LocalDateTime diaDataAgendamento) {
-        this.diaDataAgendamento = diaDataAgendamento;
     }
 }
