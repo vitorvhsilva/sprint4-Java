@@ -1,5 +1,9 @@
 package br.com.nexus.domain.repository;
 
-public interface RepositorioMecanicas extends Repositorio{
+import br.com.nexus.domain.model.Mecanica;
 
+import java.util.List;
+
+public interface RepositorioMecanicas extends Repositorio{
+    List<Mecanica> pegarMecanicasPorBairro(String bairro);
 }

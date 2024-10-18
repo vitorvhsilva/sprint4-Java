@@ -22,7 +22,7 @@ public class EnderecoUsuarioController {
     @Path("/{id}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response pegarDescricoesPorVeiculo(@PathParam("id") Long idUsuario){
+    public Response pegarEnderecosDoUsuario(@PathParam("id") Long idUsuario){
         try {
             List<EnderecoUsuario> enderecosUsuarios = enderecoUsuarioService.pegarEnderecosDoUsuario(idUsuario);
             return Response.status(Response.Status.OK).entity(enderecosUsuarios).build();
@@ -37,7 +37,7 @@ public class EnderecoUsuarioController {
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Response persistirDescricao(EnderecoUsuarioInputDTO dto){
+    public Response persistirEndereco(EnderecoUsuarioInputDTO dto){
         try {
             enderecoUsuarioService.persistirEndereco(dto);
             return Response.status(Response.Status.CREATED).build();
