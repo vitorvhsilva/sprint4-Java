@@ -10,4 +10,5 @@ public interface RepositorioUsuarios extends Repositorio{
     Long retornarIdPorCpf(String cpf);
     Usuario retornarUsuarioPorLogin(String email, String senha);
     List<Usuario> retornarUsuarios();
+    void persistirUsuario(Usuario usuario);
 }

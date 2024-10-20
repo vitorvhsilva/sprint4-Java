@@ -22,6 +22,7 @@ public class UsuarioController {
     @Path("/cadastro")
     public Response persistirUsuario(Usuario usuario) {
         try {
+            System.out.println("Ola!");
             usuarioService.persistirUsuario(usuario);
             return Response.status(Response.Status.CREATED).build();
         } catch (RuntimeException e) {

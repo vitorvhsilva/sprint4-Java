@@ -35,7 +35,10 @@ public class UsuarioDAO implements RepositorioUsuarios {
 
     @Override
     public <T> void persistirDado(T t) {
-        Usuario usuario = (Usuario) t;
+        return ;
+    }
+
+    public void persistirUsuario(Usuario usuario) {
         String sqlInsertTbUsuario = """
                 INSERT INTO TB_USUARIO (id_usuario, nome_usuario, email_usuario, senha_usuario, genero_usuario, telefone_usuario, cpf_usuario) VALUES (?, ?, ?, ?, ?, ?, ?)
                 """;
@@ -49,25 +52,28 @@ public class UsuarioDAO implements RepositorioUsuarios {
             statementUsuario.setString(5, usuario.getGenero());
             statementUsuario.setString(6, usuario.getTelefone());
             statementUsuario.setString(7, usuario.getCpf());
+            System.out.println("antes");
             statementUsuario.execute();
+            System.out.println("depois");
             statementUsuario.close();
         }catch (SQLException e) {
+            System.out.println("excecao");
             throw new RuntimeException(e);
         }
     }
 
     public boolean usuarioExistePorCpf(String cpf) {
-
         String sqlSelect = "SELECT * FROM TB_USUARIO WHERE cpf_usuario = ?";
-        boolean existe;
+        boolean existe = false;
 
-        try {
-            PreparedStatement statement = conexao.prepareStatement(sqlSelect);
+        try (PreparedStatement statement = conexao.prepareStatement(sqlSelect)) {
             statement.setString(1, cpf);
-            ResultSet rs = statement.executeQuery();
-            existe = rs.next();
+            try (ResultSet rs = statement.executeQuery()) {
+                existe = rs.next();
+            }
         } catch (SQLException e) {
-            return false;
+            e.printStackTrace();
+            throw new RuntimeException(e);
         }
 
         return existe;
@@ -76,15 +82,16 @@ public class UsuarioDAO implements RepositorioUsuarios {
     public boolean usuarioExistePorEmail(String email) {
 
         String sqlSelect = "SELECT * FROM TB_USUARIO WHERE email_usuario = ?";
-        boolean existe;
+        boolean existe = false;
 
-        try {
-            PreparedStatement statement = conexao.prepareStatement(sqlSelect);
+        try (PreparedStatement statement = conexao.prepareStatement(sqlSelect)) {
             statement.setString(1, email);
-            ResultSet rs = statement.executeQuery();
-            existe = rs.next();
+            try (ResultSet rs = statement.executeQuery()) {
+                existe = rs.next();
+            }
         } catch (SQLException e) {
-            return false;
+            e.printStackTrace();
+            throw new RuntimeException(e);
         }
 
         return existe;
