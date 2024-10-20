@@ -35,10 +35,7 @@ public class UsuarioDAO implements RepositorioUsuarios {
 
     @Override
     public <T> void persistirDado(T t) {
-        return ;
-    }
-
-    public void persistirUsuario(Usuario usuario) {
+        Usuario usuario = (Usuario) t;
         String sqlInsertTbUsuario = """
                 INSERT INTO TB_USUARIO (id_usuario, nome_usuario, email_usuario, senha_usuario, genero_usuario, telefone_usuario, cpf_usuario) VALUES (?, ?, ?, ?, ?, ?, ?)
                 """;
@@ -52,12 +49,9 @@ public class UsuarioDAO implements RepositorioUsuarios {
             statementUsuario.setString(5, usuario.getGenero());
             statementUsuario.setString(6, usuario.getTelefone());
             statementUsuario.setString(7, usuario.getCpf());
-            System.out.println("antes");
             statementUsuario.execute();
-            System.out.println("depois");
             statementUsuario.close();
         }catch (SQLException e) {
-            System.out.println("excecao");
             throw new RuntimeException(e);
         }
     }
@@ -129,8 +123,7 @@ public class UsuarioDAO implements RepositorioUsuarios {
             ResultSet rs = statement.executeQuery();
 
             if (!rs.next()) {
-                System.out.println("Login não encontrado!");
-                return null;
+                throw new RuntimeException("Login não encontrado!");
             }
 
             usuario.setNome(rs.getString("nome_usuario"));

@@ -18,9 +18,7 @@ public class UsuarioService {
 
     public void persistirUsuario(Usuario usuario) {
         validarUsuario(usuario);
-        System.out.println("Usuário validado: " + usuario);
-        usuarioDAO.persistirUsuario(usuario);
-        System.out.println("Persistido!");
+        usuarioDAO.persistirDado(usuario);
         usuarioDAO.fecharConexao();
     }
 
@@ -32,13 +30,13 @@ public class UsuarioService {
     }
 
     private void validarUsuario(Usuario usuario) {
-//        if (usuarioDAO.usuarioExistePorEmail(usuario.getEmail())) {
-//            throw new RuntimeException("Usuário já existe pelo email!");
-//        }
-//
-//        if (usuarioDAO.usuarioExistePorCpf(usuario.getCpf())) {
-//            throw new RuntimeException("Usuário já existe pelo cpf!");
-//        }
+        if (usuarioDAO.usuarioExistePorEmail(usuario.getEmail())) {
+            throw new RuntimeException("Usuário já existe pelo email!");
+        }
+
+        if (usuarioDAO.usuarioExistePorCpf(usuario.getCpf())) {
+            throw new RuntimeException("Usuário já existe pelo cpf!");
+        }
 
         if (usuario.getNome().length() < 3) {
             throw new RuntimeException("Nome muito pequeno! Digite novamente");
@@ -64,7 +62,6 @@ public class UsuarioService {
         if (usuario.getCpf().length() != 11) {
             throw new RuntimeException("CPF inválido! Digite novamente. (Exemplo: 12345678999)");
         }
-        System.out.println("Validado!");
     }
 
     public Usuario fazerLogin(UsuarioLoginDTO dto) {
