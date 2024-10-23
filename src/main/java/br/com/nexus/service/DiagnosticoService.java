@@ -16,7 +16,7 @@ public class DiagnosticoService {
 
 
     public Diagnostico persistirDiagnostico(DiagnosticoInputDTO dto) {
-        Diagnostico diagnostico = new Diagnostico(dto.getDiagnosticoVeiculo(), LocalDateTime.now(), dto.getIdVeiculo(),
+        Diagnostico diagnostico = new Diagnostico(dto.getDiagnosticoVeiculo(), LocalDateTime.now(), 0, dto.getIdVeiculo(),
                 dto.getIdDescricaoProblema());
         repositorioDiagnosticos.persistirDado(diagnostico);
         repositorioDiagnosticos.fecharConexao();

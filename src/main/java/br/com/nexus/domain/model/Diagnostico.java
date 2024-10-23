@@ -10,6 +10,8 @@ public class Diagnostico {
     @JsonProperty
     private LocalDateTime dataDiagnostico;
     @JsonProperty
+    private Integer feitoDiagnostico;
+    @JsonProperty
     private Long idVeiculo;
     @JsonProperty
     private Long idDescricaoProblema;
@@ -17,9 +19,10 @@ public class Diagnostico {
     public Diagnostico() {
     }
 
-    public Diagnostico(String diagnosticoVeiculo, LocalDateTime dataDiagnostico, Long idVeiculo, Long idDescricaoProblema) {
+    public Diagnostico(String diagnosticoVeiculo, LocalDateTime dataDiagnostico, Integer feitoDiagnostico, Long idVeiculo, Long idDescricaoProblema) {
         this.diagnosticoVeiculo = diagnosticoVeiculo;
         this.dataDiagnostico = dataDiagnostico;
+        this.feitoDiagnostico = feitoDiagnostico;
         this.idVeiculo = idVeiculo;
         this.idDescricaoProblema = idDescricaoProblema;
     }
@@ -54,5 +57,13 @@ public class Diagnostico {
 
     public void setIdDescricaoProblema(Long idDescricaoProblema) {
         this.idDescricaoProblema = idDescricaoProblema;
+    }
+
+    public Integer getFeitoDiagnostico() {
+        return feitoDiagnostico;
+    }
+
+    public void setFeitoDiagnostico(Integer feitoDiagnostico) {
+        this.feitoDiagnostico = feitoDiagnostico;
     }
 }

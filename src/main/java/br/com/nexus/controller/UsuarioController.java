@@ -63,4 +63,20 @@ public class UsuarioController {
                     .entity(e.getMessage()).build();
         }
     }
+
+    @GET
+    @Path("/{cpf}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response pegarUsuarioPorId(@PathParam("cpf") String cpf){
+        try {
+            Long idUsuario = usuarioService.pegarUsuarioPorId(cpf);
+            return Response.status(Response.Status.OK).entity(idUsuario).build();
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+            return Response
+                    .status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity(e.getMessage()).build();
+        }
+    }
 }

@@ -71,6 +71,14 @@ public class UsuarioService {
     }
 
     public List<Usuario> pegarUsuarios() {
-        return usuarioDAO.retornarUsuarios();
+        List<Usuario> usuarios =  usuarioDAO.retornarUsuarios();
+        usuarioDAO.fecharConexao();
+        return usuarios;
+    }
+
+    public Long pegarUsuarioPorId(String cpf) {
+        Long idUsuario = usuarioDAO.retornarIdPorCpf(cpf);
+        usuarioDAO.fecharConexao();
+        return idUsuario;
     }
 }

@@ -36,15 +36,12 @@ public class DescricaoProblemaService {
                 usuarioeVeiculo.getIdUsuario(), usuarioeVeiculo.getIdVeiculo());
         repositorioDescricaoProblema.persistirDado(descricaoProblema);
 
-        System.out.println(descricaoProblema);
         // fazendo o diagnostico
         Long idDescricaoProblema = repositorioDescricaoProblema.buscarIdPorVeiculoEDescricao(descricaoProblema);
-        System.out.println(idDescricaoProblema);
         DiagnosticoInputDTO diagnosticoDTO = new DiagnosticoInputDTO("Diagnostico vindo de IA", usuarioeVeiculo.getIdVeiculo(), idDescricaoProblema);
 
         // criando o diagnostico pra retornar na response
         Diagnostico diagnostico = diagnosticoService.persistirDiagnostico(diagnosticoDTO);
-
 
         fecharConexoes();
 

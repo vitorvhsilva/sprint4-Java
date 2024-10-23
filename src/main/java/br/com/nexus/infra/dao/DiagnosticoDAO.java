@@ -52,6 +52,19 @@ public class DiagnosticoDAO implements RepositorioDiagnosticos {
         }
     }
 
+    public void atualizarDiagnostico(Long idDiagnostico) {
+        String sqlUpdate = "UPDATE TB_DIAGNOSTICO SET feito_diagnostico = 1 WHERE id_diagnostico = ?";
+        try {
+            PreparedStatement preparedStatement = conexao.prepareStatement(sqlUpdate);
+            preparedStatement.setLong(1, idDiagnostico);
+            preparedStatement.execute();
+            preparedStatement.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
     public List<Diagnostico> pegarDiagnosticos(long idVeiculo){
         String sqlSelect = "SELECT * FROM TB_DIAGNOSTICO WHERE id_veiculo = ?";
         List<Diagnostico> diagnosticos = new ArrayList<>();
@@ -64,6 +77,7 @@ public class DiagnosticoDAO implements RepositorioDiagnosticos {
                 diagnostico.setDataDiagnostico(rs.getTimestamp("data_diagnostico").toLocalDateTime());
                 diagnostico.setDiagnosticoVeiculo(rs.getString("diagnostico_veiculo"));
                 diagnostico.setIdVeiculo(idVeiculo);
+                diagnostico.setFeitoDiagnostico(rs.getInt("feito_diagnostico"));
                 diagnostico.setIdDescricaoProblema(rs.getLong("id_descricao_problema"));
                 diagnosticos.add(diagnostico);
             }
