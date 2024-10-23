@@ -4,6 +4,7 @@ import br.com.nexus.domain.model.Veiculo;
 import br.com.nexus.domain.repository.Repositorio;
 import br.com.nexus.domain.repository.RepositorioVeiculos;
 import br.com.nexus.dto.UsuarioeVeiculoOutputDTO;
+import br.com.nexus.dto.VeiculoDiagnosticoDTO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

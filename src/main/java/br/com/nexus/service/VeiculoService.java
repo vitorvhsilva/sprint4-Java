@@ -1,18 +1,24 @@
 package br.com.nexus.service;
 
+import br.com.nexus.domain.model.Diagnostico;
 import br.com.nexus.domain.model.Veiculo;
+import br.com.nexus.domain.repository.RepositorioDiagnosticos;
 import br.com.nexus.domain.repository.RepositorioUsuarios;
 import br.com.nexus.domain.repository.RepositorioVeiculos;
+import br.com.nexus.dto.VeiculoDiagnosticoDTO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class VeiculoService {
     private RepositorioVeiculos repositorioVeiculos;
     private RepositorioUsuarios repositorioUsuarios;
+    private RepositorioDiagnosticos repositorioDiagnosticos;
 
-    public VeiculoService(RepositorioVeiculos repositorioVeiculos, RepositorioUsuarios repositorioUsuario) {
+    public VeiculoService(RepositorioVeiculos repositorioVeiculos, RepositorioUsuarios repositorioUsuarios, RepositorioDiagnosticos repositorioDiagnosticos) {
         this.repositorioVeiculos = repositorioVeiculos;
-        this.repositorioUsuarios = repositorioUsuario;
+        this.repositorioUsuarios = repositorioUsuarios;
+        this.repositorioDiagnosticos = repositorioDiagnosticos;
     }
 
     public List<Veiculo> pegarVeiculosDoUsuario(String cpf) {
@@ -28,9 +34,32 @@ public class VeiculoService {
         fecharConexoes();
     }
 
+
+    public List<VeiculoDiagnosticoDTO> pegarVeiculosEDiagnosticoDoUsuario(String cpf) {
+        Long idUsuario = repositorioUsuarios.retornarIdPorCpf(cpf);
+        List<Veiculo> veiculos = repositorioVeiculos.pegarVeiculos(idUsuario);
+
+        List<VeiculoDiagnosticoDTO> dtos = new ArrayList<>();
+
+        for (Veiculo veiculo: veiculos) {
+            List<Diagnostico> diagnosticos = repositorioDiagnosticos.pegarDiagnosticosPorPlaca(veiculo.getPlaca());
+            VeiculoDiagnosticoDTO dto = new VeiculoDiagnosticoDTO();
+            dto.setMarca(veiculo.getMarca());
+            dto.setAno(veiculo.getAno());
+            dto.setPlaca(veiculo.getPlaca());
+            dto.setTipo(veiculo.getTipo());
+            dto.setIdUsuario(veiculo.getIdUsuario());
+            dto.setModelo(dto.getModelo());
+            dto.setDiagnosticos(diagnosticos);
+            dtos.add(dto);
+        }
+        return dtos;
+    }
+
     private void fecharConexoes() {
         repositorioVeiculos.fecharConexao();
         repositorioUsuarios.fecharConexao();
+        repositorioDiagnosticos.fecharConexao();
     }
 
     private void validarVeiculo(Veiculo veiculo) {

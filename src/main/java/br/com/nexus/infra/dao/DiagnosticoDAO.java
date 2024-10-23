@@ -90,6 +90,36 @@ public class DiagnosticoDAO implements RepositorioDiagnosticos {
         return diagnosticos;
     }
 
+    public List<Diagnostico> pegarDiagnosticosPorPlaca(String placa){
+        String sqlSelect = """
+            SELECT d.* FROM TB_VEICULO v
+            INNER JOIN TB_DIAGNOSTICO d
+            ON v.id_veiculo = d.id_veiculo
+            WHERE v.placa_veiculo = ?
+            """;
+        List<Diagnostico> diagnosticos = new ArrayList<>();
+        try{
+            PreparedStatement selectDiagnostico = conexao.prepareStatement(sqlSelect);
+            selectDiagnostico.setString(1, placa);
+            ResultSet rs = selectDiagnostico.executeQuery();
+            while(rs.next()){
+                Diagnostico diagnostico = new Diagnostico();
+                diagnostico.setDataDiagnostico(rs.getTimestamp("data_diagnostico").toLocalDateTime());
+                diagnostico.setDiagnosticoVeiculo(rs.getString("diagnostico_veiculo"));
+                diagnostico.setIdVeiculo(rs.getLong("id_veiculo"));
+                diagnostico.setFeitoDiagnostico(rs.getInt("feito_diagnostico"));
+                diagnostico.setIdDescricaoProblema(rs.getLong("id_descricao_problema"));
+                diagnosticos.add(diagnostico);
+            }
+
+            rs.close();
+            selectDiagnostico.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return diagnosticos;
+    }
+
     public Long buscarIdPorDataEIds(Diagnostico diagnostico) {
         String sqlSelect = "SELECT * FROM TB_DIAGNOSTICO WHERE data_diagnostico= ? AND id_veiculo = ? AND id_descricao_problema = ?";
         Long idDiagnostico = null;
