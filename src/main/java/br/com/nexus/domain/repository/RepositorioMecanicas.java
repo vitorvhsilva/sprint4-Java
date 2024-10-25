@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface RepositorioMecanicas extends Repositorio{
     List<Mecanica> pegarMecanicasPorBairro(String bairro);
+    Long retornarIdPeloNome(String nomeMecanica);
 }

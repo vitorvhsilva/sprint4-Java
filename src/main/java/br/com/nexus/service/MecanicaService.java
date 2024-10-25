@@ -16,7 +16,8 @@ public class MecanicaService {
         this.repositorioHorarioMecanicas = repositorioHorarioMecanicas;
     }
 
-    public List<HorarioMecanica> pegarHorariosPorMecanica(Long idMecanica) {
+    public List<HorarioMecanica> pegarHorariosPorMecanica(Mecanica mecanica) {
+        Long idMecanica = repositorioMecanicas.retornarIdPeloNome(mecanica.getNomeMecanica());
         List<HorarioMecanica> horarioMecanicas = repositorioHorarioMecanicas.pegarHorarioPorMecanica(idMecanica);
         fecharConexoes();
         return horarioMecanicas;

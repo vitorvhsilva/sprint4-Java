@@ -75,6 +75,28 @@ public class MecanicaDAO implements RepositorioMecanicas {
         return mecanicas;
     }
 
+    @Override
+    public Long retornarIdPeloNome(String nomeMecanica) {
+
+        String sqlSelect = "SELECT * FROM TB_MECANICA WHERE nome_mecanica = ?";
+        Long id = null;
+        try {
+            PreparedStatement statement = conexao.prepareStatement(sqlSelect);
+            statement.setString(1, nomeMecanica);
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()) {
+                id = rs.getLong("id_mecanica");
+            }
+
+            statement.close();
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return id;
+    }
+
     public void fecharConexao(){
         try {
             conexao.close();
