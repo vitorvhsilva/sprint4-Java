@@ -24,7 +24,8 @@ public class EnderecoUsuarioService {
         fecharConexoes();
     }
 
-    public List<EnderecoUsuario> pegarEnderecosDoUsuario(Long idUsuario) {
+    public List<EnderecoUsuario> pegarEnderecosDoUsuario(String cpf) {
+        Long idUsuario = repositorioUsuarios.retornarIdPorCpf(cpf);
         List<EnderecoUsuario> enderecosUsuarios = repositorioEnderecoUsuario.pegarEnderecosPorUsuario(idUsuario);
         fecharConexoes();
         return enderecosUsuarios;

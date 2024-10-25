@@ -19,12 +19,12 @@ public class EnderecoUsuarioController {
         this.enderecoUsuarioService = new EnderecoUsuarioService(new EnderecoUsuarioDAO(), new UsuarioDAO());
     }
 
-    @Path("/{id}")
+    @Path("/{cpf}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response pegarEnderecosDoUsuario(@PathParam("id") Long idUsuario){
+    public Response pegarEnderecosDoUsuario(@PathParam("cpf") String cpf){
         try {
-            List<EnderecoUsuario> enderecosUsuarios = enderecoUsuarioService.pegarEnderecosDoUsuario(idUsuario);
+            List<EnderecoUsuario> enderecosUsuarios = enderecoUsuarioService.pegarEnderecosDoUsuario(cpf);
             return Response.status(Response.Status.OK).entity(enderecosUsuarios).build();
         } catch (RuntimeException e) {
             System.out.println(e.getMessage());

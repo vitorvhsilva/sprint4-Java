@@ -1,14 +1,12 @@
 package br.com.nexus.controller;
 
-import br.com.nexus.domain.model.EnderecoUsuario;
 import br.com.nexus.domain.model.HorarioMecanica;
-import br.com.nexus.dto.EnderecoUsuarioInputDTO;
-import br.com.nexus.infra.dao.EnderecoUsuarioDAO;
+import br.com.nexus.domain.model.Mecanica;
+import br.com.nexus.dto.MecanicaBairroInputDTO;
 import br.com.nexus.infra.dao.HorarioMecanicaDAO;
 import br.com.nexus.infra.dao.MecanicaDAO;
-import br.com.nexus.infra.dao.UsuarioDAO;
-import br.com.nexus.service.EnderecoUsuarioService;
 import br.com.nexus.service.MecanicaService;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -30,6 +28,22 @@ public class MecanicaController {
         try {
             List<HorarioMecanica> horarioMecanicas = mecanicaService.pegarHorariosPorMecanica(idMecanica);
             return Response.status(Response.Status.OK).entity(horarioMecanicas).build();
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+            return Response
+                    .status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity(e.getMessage()).build();
+        }
+    }
+
+    @POST
+    @Path("/bairro")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response pegarMecanicasPorBairro(MecanicaBairroInputDTO dto){
+        try {
+            List<Mecanica> mecanicas = mecanicaService.pegarMecanicasPorBairro(dto.getBairro());
+            return Response.status(Response.Status.OK).entity(mecanicas).build();
         } catch (RuntimeException e) {
             System.out.println(e.getMessage());
             e.printStackTrace();

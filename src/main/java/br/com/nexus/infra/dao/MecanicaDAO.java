@@ -56,7 +56,7 @@ public class MecanicaDAO implements RepositorioMecanicas {
             SELECT m.nome_mecanica
             FROM TB_MECANICA m INNER JOIN TB_ENDERECO_MECANICA e
             ON m.id_mecanica = e.id_mecanica
-            WHERE e.bairro_endereco_mecanica = ?;
+            WHERE e.bairro_endereco_mecanica = ?
             """;
         List<Mecanica> mecanicas = new ArrayList<>();
 

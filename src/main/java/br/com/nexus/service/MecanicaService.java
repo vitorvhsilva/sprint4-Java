@@ -1,6 +1,7 @@
 package br.com.nexus.service;
 
 import br.com.nexus.domain.model.HorarioMecanica;
+import br.com.nexus.domain.model.Mecanica;
 import br.com.nexus.domain.repository.RepositorioHorarioMecanicas;
 import br.com.nexus.domain.repository.RepositorioMecanicas;
 
@@ -24,5 +25,11 @@ public class MecanicaService {
     private void fecharConexoes(){
         repositorioHorarioMecanicas.fecharConexao();
         repositorioMecanicas.fecharConexao();
+    }
+
+    public List<Mecanica> pegarMecanicasPorBairro(String bairro) {
+        List<Mecanica> mecanicas = repositorioMecanicas.pegarMecanicasPorBairro(bairro);
+        fecharConexoes();
+        return mecanicas;
     }
 }
