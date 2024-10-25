@@ -2,6 +2,7 @@ package br.com.nexus.controller;
 
 import br.com.nexus.domain.model.Diagnostico;
 import br.com.nexus.domain.model.Orcamento;
+import br.com.nexus.infra.dao.DiagnosticoDAO;
 import br.com.nexus.infra.dao.OrcamentoDAO;
 import br.com.nexus.service.OrcamentoService;
 
@@ -15,7 +16,7 @@ public class OrcamentoController {
     private OrcamentoService orcamentoService;
 
     public OrcamentoController() {
-        this.orcamentoService = new OrcamentoService(new OrcamentoDAO());
+        this.orcamentoService = new OrcamentoService(new OrcamentoDAO(), new DiagnosticoDAO());
     }
 
     @POST

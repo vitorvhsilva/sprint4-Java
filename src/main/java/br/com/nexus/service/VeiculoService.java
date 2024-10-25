@@ -49,7 +49,7 @@ public class VeiculoService {
             dto.setPlaca(veiculo.getPlaca());
             dto.setTipo(veiculo.getTipo());
             dto.setIdUsuario(veiculo.getIdUsuario());
-            dto.setModelo(dto.getModelo());
+            dto.setModelo(veiculo.getModelo());
             dto.setDiagnosticos(diagnosticos);
             dtos.add(dto);
         }

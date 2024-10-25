@@ -8,4 +8,5 @@ public interface RepositorioDiagnosticos extends Repositorio{
     List<Diagnostico> pegarDiagnosticos(long idVeiculo);
     Long buscarIdPorDataEIds(Diagnostico diagnostico);
     List<Diagnostico> pegarDiagnosticosPorPlaca(String placa);
+    void atualizarDiagnostico(Diagnostico diagnostico);
 }

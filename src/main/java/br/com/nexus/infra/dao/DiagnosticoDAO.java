@@ -120,6 +120,28 @@ public class DiagnosticoDAO implements RepositorioDiagnosticos {
         return diagnosticos;
     }
 
+    @Override
+    public void atualizarDiagnostico(Diagnostico diagnostico) {
+        String sqlUpdate = """
+                UPDATE TB_DIAGNOSTICO 
+                SET feito_diagnostico = 1 
+                WHERE id_descricao_problema = ? AND id_veiculo = ? AND diagnostico_veiculo = ? AND data_diagnostico = ?
+                """;
+
+        try {
+            PreparedStatement ps = conexao.prepareStatement(sqlUpdate);
+            ps.setLong(1, diagnostico.getIdDescricaoProblema());
+            ps.setLong(2, diagnostico.getIdVeiculo());
+            ps.setString(3, diagnostico.getDiagnosticoVeiculo());
+            ps.setTimestamp(4, Timestamp.valueOf(diagnostico.getDataDiagnostico()));
+            ps.execute();
+            ps.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
     public Long buscarIdPorDataEIds(Diagnostico diagnostico) {
         String sqlSelect = "SELECT * FROM TB_DIAGNOSTICO WHERE data_diagnostico= ? AND id_veiculo = ? AND id_descricao_problema = ?";
         Long idDiagnostico = null;

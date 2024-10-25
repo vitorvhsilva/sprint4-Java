@@ -75,4 +75,16 @@ public class Veiculo {
     public void setIdUsuario(Long idUsuario) {
         this.idUsuario = idUsuario;
     }
+
+    @Override
+    public String toString() {
+        return "Veiculo{" +
+                "placa='" + placa + '\'' +
+                ", marca='" + marca + '\'' +
+                ", modelo='" + modelo + '\'' +
+                ", tipo='" + tipo + '\'' +
+                ", ano=" + ano +
+                ", idUsuario=" + idUsuario +
+                '}';
+    }
 }
