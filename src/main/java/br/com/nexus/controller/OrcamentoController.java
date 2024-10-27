@@ -4,6 +4,7 @@ import br.com.nexus.domain.model.Diagnostico;
 import br.com.nexus.domain.model.Orcamento;
 import br.com.nexus.infra.dao.DiagnosticoDAO;
 import br.com.nexus.infra.dao.OrcamentoDAO;
+import br.com.nexus.infra.dao.VeiculoDAO;
 import br.com.nexus.service.OrcamentoService;
 
 import javax.ws.rs.*;
@@ -16,7 +17,7 @@ public class OrcamentoController {
     private OrcamentoService orcamentoService;
 
     public OrcamentoController() {
-        this.orcamentoService = new OrcamentoService(new OrcamentoDAO(), new DiagnosticoDAO());
+        this.orcamentoService = new OrcamentoService(new OrcamentoDAO(), new DiagnosticoDAO(), new VeiculoDAO());
     }
 
     @POST
@@ -34,12 +35,12 @@ public class OrcamentoController {
         }
     }
 
-    @Path("/veiculo/{id}")
+    @Path("/veiculo/{placa}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response pegarOrcamentosPorVeiculo(@PathParam("id") Long idVeiculo){
+    public Response pegarOrcamentosPorVeiculo(@PathParam("placa") String placa){
         try {
-            List<Orcamento> orcamentos = orcamentoService.pegarOrcamentosPorVeiculo(idVeiculo);
+            List<Orcamento> orcamentos = orcamentoService.pegarOrcamentosPorVeiculo(placa);
             return Response.status(Response.Status.OK).entity(orcamentos).build();
         } catch (RuntimeException e) {
             System.out.println(e.getMessage());

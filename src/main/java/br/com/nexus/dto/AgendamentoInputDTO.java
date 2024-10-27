@@ -6,30 +6,30 @@ import java.time.LocalDateTime;
 
 public class AgendamentoInputDTO {
     @JsonProperty
-    private Long idVeiculo;
+    private String placaVeiculo;
     @JsonProperty
     private Long idMecanica;
     @JsonProperty
-    private Long idOrcamento;
+    private Long idDiagnostico;
     @JsonProperty
-    private Long idHorarioMecanica;
+    private LocalDateTime horarioDisponivel;
 
     public AgendamentoInputDTO() {
     }
 
-    public AgendamentoInputDTO(Long idVeiculo, Long idMecanica, Long idOrcamento, Long idHorarioMecanica) {
-        this.idVeiculo = idVeiculo;
+    public AgendamentoInputDTO(String placaVeiculo, Long idMecanica, Long idDiagnostico, LocalDateTime horarioDisponivel) {
+        this.placaVeiculo = placaVeiculo;
         this.idMecanica = idMecanica;
-        this.idOrcamento = idOrcamento;
-        this.idHorarioMecanica = idHorarioMecanica;
+        this.idDiagnostico = idDiagnostico;
+        this.horarioDisponivel = horarioDisponivel;
     }
 
-    public Long getIdVeiculo() {
-        return idVeiculo;
+    public String getPlacaVeiculo() {
+        return placaVeiculo;
     }
 
-    public void setIdVeiculo(Long idVeiculo) {
-        this.idVeiculo = idVeiculo;
+    public void setPlacaVeiculo(String placaVeiculo) {
+        this.placaVeiculo = placaVeiculo;
     }
 
     public Long getIdMecanica() {
@@ -40,19 +40,19 @@ public class AgendamentoInputDTO {
         this.idMecanica = idMecanica;
     }
 
-    public Long getIdOrcamento() {
-        return idOrcamento;
+    public Long getIdDiagnostico() {
+        return idDiagnostico;
     }
 
-    public void setIdOrcamento(Long idOrcamento) {
-        this.idOrcamento = idOrcamento;
+    public void setIdDiagnostico(Long idDiagnostico) {
+        this.idDiagnostico = idDiagnostico;
     }
 
-    public Long getIdHorarioMecanica() {
-        return idHorarioMecanica;
+    public LocalDateTime getHorarioDisponivel() {
+        return horarioDisponivel;
     }
 
-    public void setIdHorarioMecanica(Long idHorarioMecanica) {
-        this.idHorarioMecanica = idHorarioMecanica;
+    public void setHorarioDisponivel(LocalDateTime horarioDisponivel) {
+        this.horarioDisponivel = horarioDisponivel;
     }
 }

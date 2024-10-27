@@ -5,10 +5,7 @@ import br.com.nexus.domain.model.DescricaoProblema;
 import br.com.nexus.domain.model.Diagnostico;
 import br.com.nexus.dto.AgendamentoInputDTO;
 import br.com.nexus.dto.DescricaoProblemaInputDTO;
-import br.com.nexus.infra.dao.AgendamentoDAO;
-import br.com.nexus.infra.dao.DescricaoProblemaDAO;
-import br.com.nexus.infra.dao.HorarioMecanicaDAO;
-import br.com.nexus.infra.dao.VeiculoDAO;
+import br.com.nexus.infra.dao.*;
 import br.com.nexus.service.AgendamentoService;
 
 import javax.ws.rs.*;
@@ -21,7 +18,7 @@ public class AgendamentoController {
     private AgendamentoService agendamentoService;
 
     public AgendamentoController() {
-        this.agendamentoService = new AgendamentoService(new AgendamentoDAO(), new HorarioMecanicaDAO());
+        this.agendamentoService = new AgendamentoService(new AgendamentoDAO(), new HorarioMecanicaDAO(), new OrcamentoDAO(), new VeiculoDAO());
     }
 
     @Path("/veiculo/{id}")
@@ -60,7 +57,7 @@ public class AgendamentoController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response persistirAgendamento(AgendamentoInputDTO dto){
         try {
-            Agendamento agendamento = agendamentoService.persistirDescricao(dto);
+            Agendamento agendamento = agendamentoService.persistirAgendamento(dto);
             return Response.status(Response.Status.CREATED).entity(agendamento).build();
         } catch (RuntimeException e) {
             System.out.println(e.getMessage());

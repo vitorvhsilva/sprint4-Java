@@ -4,10 +4,7 @@ import br.com.nexus.domain.model.HorarioMecanica;
 import br.com.nexus.domain.model.Mecanica;
 import br.com.nexus.domain.repository.RepositorioHorarioMecanicas;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -92,6 +89,30 @@ public class HorarioMecanicaDAO implements RepositorioHorarioMecanicas {
             throw new RuntimeException(e);
         }
         return horarioMecanicas.get(0).getHorarioDisponivel();
+    }
+
+    @Override
+    public Long pegarIdHorarioPorMecanicaEDateTime(Long idMecanica, LocalDateTime time) {
+        String sqlSelect = """
+            SELECT *
+            FROM TB_HORARIO_MECANICA
+            WHERE id_mecanica = ? AND horario_disponivel = ?
+            """;
+        Long idHorarioMecanica = null;
+        try {
+            PreparedStatement statement = conexao.prepareStatement(sqlSelect);
+            statement.setLong(1, idMecanica);
+            statement.setTimestamp(2, Timestamp.valueOf(time));
+            ResultSet rs = statement.executeQuery();
+            while(rs.next()) {
+                idHorarioMecanica = rs.getLong("id_horario_mecanica");
+            }
+            statement.close();
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return idHorarioMecanica;
     }
 
     public void fecharConexao(){

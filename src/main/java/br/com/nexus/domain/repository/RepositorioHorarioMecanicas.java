@@ -8,4 +8,5 @@ import java.util.List;
 public interface RepositorioHorarioMecanicas extends Repositorio{
     List<HorarioMecanica> pegarHorarioPorMecanica(Long idMecanica);
     LocalDateTime pegarHorarioPorId(Long idHorarioMecanica);
+    Long pegarIdHorarioPorMecanicaEDateTime(Long idMecanica, LocalDateTime time);
 }

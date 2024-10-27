@@ -77,6 +77,24 @@ public class OrcamentoDAO implements RepositorioOrcamentos {
         return orcamentos;
     }
 
+    public Long pegarOrcamentoPorDiagnostico(long idDiagnostico){
+        String sqlSelect = "SELECT * FROM TB_ORCAMENTO WHERE id_diagnostico = ?";
+        Long idOrcamento = null;
+        try {
+            PreparedStatement statement = conexao.prepareStatement(sqlSelect);
+            statement.setLong(1, idDiagnostico);
+            ResultSet rs = statement.executeQuery();
+            while(rs.next()) {
+                idOrcamento = rs.getLong("id_orcamento");
+            }
+            statement.close();
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return idOrcamento;
+    }
+
     public void fecharConexao(){
         try {
             conexao.close();
