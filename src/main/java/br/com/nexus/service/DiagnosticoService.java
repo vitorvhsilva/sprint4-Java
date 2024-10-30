@@ -7,7 +7,7 @@ import br.com.nexus.dto.DiagnosticoInputDTO;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class DiagnosticoService {
+public class DiagnosticoService implements ServicosDoDiagnostico {
     private RepositorioDiagnosticos repositorioDiagnosticos;
 
     public DiagnosticoService(RepositorioDiagnosticos repositorioDiagnosticos) {

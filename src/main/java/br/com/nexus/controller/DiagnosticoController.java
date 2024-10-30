@@ -5,6 +5,7 @@ import br.com.nexus.domain.model.Diagnostico;
 import br.com.nexus.dto.DiagnosticoInputDTO;
 import br.com.nexus.infra.dao.DiagnosticoDAO;
 import br.com.nexus.service.DiagnosticoService;
+import br.com.nexus.service.ServicosDoDiagnostico;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -13,7 +14,7 @@ import java.util.List;
 
 @Path("diagnosticos")
 public class DiagnosticoController {
-    private DiagnosticoService diagnosticoService;
+    private ServicosDoDiagnostico diagnosticoService;
 
     public DiagnosticoController() {
         this.diagnosticoService = new DiagnosticoService(new DiagnosticoDAO());

@@ -15,12 +15,12 @@ import java.util.List;
 public class DescricaoProblemaService {
     private RepositorioDescricaoProblema repositorioDescricaoProblema;
     private RepositorioVeiculos repositorioVeiculos;
-    private DiagnosticoService diagnosticoService;
+    private ServicosDoDiagnostico servicosDoDiagnostico;
 
     public DescricaoProblemaService(RepositorioDescricaoProblema repositorioDescricaoProblema, RepositorioVeiculos repositorioVeiculos) {
         this.repositorioDescricaoProblema = repositorioDescricaoProblema;
         this.repositorioVeiculos = repositorioVeiculos;
-        this.diagnosticoService = new DiagnosticoService(new DiagnosticoDAO());
+        this.servicosDoDiagnostico = new DiagnosticoService(new DiagnosticoDAO());
     }
 
     public List<DescricaoProblema> pegarDescricoesPorVeiculo(Long idVeiculo) {
@@ -41,7 +41,7 @@ public class DescricaoProblemaService {
         DiagnosticoInputDTO diagnosticoDTO = new DiagnosticoInputDTO("Diagnostico vindo de IA", usuarioeVeiculo.getIdVeiculo(), idDescricaoProblema);
 
         // criando o diagnostico pra retornar na response
-        Diagnostico diagnostico = diagnosticoService.persistirDiagnostico(diagnosticoDTO);
+        Diagnostico diagnostico = servicosDoDiagnostico.persistirDiagnostico(diagnosticoDTO);
 
         fecharConexoes();
 
